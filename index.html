@@ -60,6 +60,13 @@
   }
   function createDownloadLink() {
     recorder && recorder.exportWAV(function(blob) {
+	    // convert blob to base64
+     var reader = new FileReader();
+    reader.readAsDataURL(blob); 
+    reader.onloadend = function() {
+        base64data = reader.result;                
+        console.log(base64data);
+    }
       var url = URL.createObjectURL(blob);
       var li = document.createElement('li');
       var au = document.createElement('audio');
