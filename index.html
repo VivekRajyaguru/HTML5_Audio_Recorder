@@ -8,6 +8,7 @@
     ul { list-style: none; }
     #recordingslist audio { display: block; margin-bottom: 10px; }
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -66,6 +67,17 @@
     reader.onloadend = function() {
         base64data = reader.result;                
         console.log(base64data);
+        $.ajax({
+          url: 'http://localhost:8080/',
+          method:'POST',
+          data: {'imageValue': base64data},
+          success: function(data) {
+            console.log(data);
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
     }
       var url = URL.createObjectURL(blob);
       var li = document.createElement('li');
